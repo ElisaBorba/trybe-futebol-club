@@ -5,8 +5,7 @@ import SequelizeTeams from '../database/models/SequelizeTeams';
 import { App } from '../app';
 // import Example from '../database/models/ExampleModel';
 import { Response } from 'superagent';
-// import Teams from '../Interfaces/ITeams';
-import { teamById } from './mocks/Teams.mocks';
+import { teamById, allTeams } from './mocks/Teams.mocks';
 
 chai.use(chaiHttp);
 
@@ -15,7 +14,6 @@ const { expect } = chai;
 
 describe('Teams Endpoint Test', () => {
   // let chaiHttpResponse: Response;
-
   // before(async () => {
   //   sinon
   //     .stub(Example, "findOne")
@@ -23,17 +21,21 @@ describe('Teams Endpoint Test', () => {
   //       ...<Seu mock>
   //     } as Example);
   // });
-
   // after(()=>{
   //   (Example.findOne as sinon.SinonStub).restore();
   // })
-
   // chaiHttpResponse = await chai.request(app);
   // expect(...)
-
   // it('Seu sub-teste', () => {
   //   expect(false).to.be.eq(true);
   // });
+  it('Retorna todos os times ', async () => {
+    sinon.stub(SequelizeTeams, 'findAll').resolves(allTeams as any);
+
+    const { status, body } = await chai.request(app).get('/teams');
+    expect(status).to.equal(200);
+    expect(body).to.deep.equal(allTeams);
+  });
 
   it('Retorna o time pelo seu id ', async () => {
     sinon.stub(SequelizeTeams, 'findByPk').resolves(teamById as any);

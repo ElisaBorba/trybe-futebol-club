@@ -3,4 +3,6 @@ const teamById = {
   teamName: 'Cruzeiro',
 };
 
-export { teamById };
+const allTeams = [teamById];
+
+export { teamById, allTeams };
