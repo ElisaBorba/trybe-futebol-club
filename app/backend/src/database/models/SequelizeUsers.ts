@@ -3,6 +3,7 @@ import {
   Model,
   InferAttributes,
   InferCreationAttributes,
+  CreationOptional,
 } from 'sequelize';
 import db from '.';
 
@@ -10,7 +11,7 @@ class SequelizeUsers extends Model<
   InferAttributes<SequelizeUsers>,
   InferCreationAttributes<SequelizeUsers>
 > {
-  declare id: number;
+  declare id: CreationOptional<number>;
 
   declare username: string;
 
