@@ -3,8 +3,6 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import SequelizeTeams from '../database/models/SequelizeTeams';
 import { App } from '../app';
-// import Example from '../database/models/ExampleModel';
-import { Response } from 'superagent';
 import { teamById, allTeams } from './mocks/Teams.mocks';
 
 chai.use(chaiHttp);
@@ -13,22 +11,6 @@ const { app } = new App();
 const { expect } = chai;
 
 describe('Teams Endpoint Test', () => {
-  // let chaiHttpResponse: Response;
-  // before(async () => {
-  //   sinon
-  //     .stub(Example, "findOne")
-  //     .resolves({
-  //       ...<Seu mock>
-  //     } as Example);
-  // });
-  // after(()=>{
-  //   (Example.findOne as sinon.SinonStub).restore();
-  // })
-  // chaiHttpResponse = await chai.request(app);
-  // expect(...)
-  // it('Seu sub-teste', () => {
-  //   expect(false).to.be.eq(true);
-  // });
   it('Retorna todos os times ', async () => {
     sinon.stub(SequelizeTeams, 'findAll').resolves(allTeams as any);
 
