@@ -1,7 +1,9 @@
 import * as express from 'express';
+import routes from './routes';
 import 'express-async-errors';
 
 import errorMiddleware from './middlewares/errorMiddleware';
+const { teamsRoutes } = routes;
 
 class App {
   public app: express.Express;
@@ -13,16 +15,21 @@ class App {
 
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
+    this.app.use('/teams', teamsRoutes);
+    this.app.use('/teams:id', teamsRoutes);
 
     // Não remova esse middleware de erro, mas fique a vontade para customizá-lo
     // Mantenha ele sempre como o último middleware a ser chamado
     this.app.use(errorMiddleware);
   }
 
-  private config():void {
+  private config(): void {
     const accessControl: express.RequestHandler = (_req, res, next) => {
       res.header('Access-Control-Allow-Origin', '*');
-      res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT,PATCH');
+      res.header(
+        'Access-Control-Allow-Methods',
+        'GET,POST,DELETE,OPTIONS,PUT,PATCH'
+      );
       res.header('Access-Control-Allow-Headers', '*');
       next();
     };
