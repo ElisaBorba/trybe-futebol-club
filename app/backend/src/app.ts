@@ -1,8 +1,8 @@
 import * as express from 'express';
 import routes from './routes';
 import 'express-async-errors';
-
 import errorMiddleware from './middlewares/errorMiddleware';
+
 const { teamsRoutes } = routes;
 
 class App {
