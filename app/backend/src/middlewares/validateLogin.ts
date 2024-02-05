@@ -6,8 +6,8 @@ function validateLogin(
   next: NextFunction
 ): Response | void {
   const regex = /^[\w.-]+@(?:[\w-]+\.)+[a-zA-Z]{2,}$/;
-  const email = req.body.email;
-  const password = req.body.password;
+  const { email } = req.body;
+  const { password } = req.body;
 
   if (!email || !password) {
     return res.status(400).json({ message: 'All fields must be filled' });

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import * as bcrypt from 'bcryptjs';
 import UserModel from '../models/UserModel';
 import IUserModel from '../Interfaces/IUserModel';
@@ -5,8 +6,8 @@ import { ServiceResponse } from '../Interfaces/ServiceResponse';
 import { Token } from '../Interfaces/iToken';
 import ILoginBody from '../Interfaces/iLogin';
 import jwtUtil from '../utils/jwt.utils';
-import { IRole } from '../Interfaces/iUser';
-import SequelizeUsers from '../database/models/SequelizeUsers';
+import IUser, { IRole } from '../Interfaces/iUser';
+// import SequelizeUsers from '../database/models/SequelizeUsers';
 
 export default class UserService {
   constructor(private userModel: IUserModel = new UserModel()) {}
@@ -27,22 +28,27 @@ export default class UserService {
     return { status: 'successful', data: { token } };
   }
 
-  public async role(login: ILoginBody): Promise<ServiceResponse<IRole>> {
-    const user = await this.userModel.login(login.email);
-    if (!user) {
+  public async role(authorization: string): Promise<ServiceResponse<IRole>> {
+    const token = authorization.split(' ')[1];
+    try {
+      const decoded = await jwtUtil.verify(token);
+      if (!decoded) {
+        return {
+          status: 'unauthorized',
+          data: { message: 'Invalid email or password' },
+        };
+      }
+
+      const user = (await this.userModel.login(decoded.email)) as IUser;
+      return {
+        status: 'successful',
+        data: { role: user.role },
+      };
+    } catch (error) {
       return {
         status: 'unauthorized',
-        data: { message: 'Invalid email or password' },
+        data: { message: 'Token must be a valid token' },
       };
     }
-
-    const role = {
-      role: user.role,
-    };
-
-    return {
-      status: 'successful',
-      data: role,
-    };
   }
 }
