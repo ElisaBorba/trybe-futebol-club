@@ -1,5 +1,5 @@
 import * as jwt from 'jsonwebtoken';
-import { TokenPayload } from '../Interfaces/iLogin';
+import { TokenPayload } from '../Interfaces/iToken';
 
 const secret = process.env.JWT_SECRET || 'jwt_secret';
 

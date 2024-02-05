@@ -5,3 +5,6 @@ export default interface IUser {
   email: string;
   password: string;
 }
+export interface IRole {
+  role: string;
+}
