@@ -2,11 +2,15 @@ import { Request, Router, Response } from 'express';
 import UserController from '../controllers/user.controller';
 import validateLogin from '../middlewares/validateLogin';
 
-const loginController = new UserController();
+const userController = new UserController();
 
 const loginRoutes = Router();
 
 loginRoutes.post('/', validateLogin, async (req: Request, res: Response) =>
-  loginController.login(req, res)
+  userController.login(req, res)
+);
+
+loginRoutes.get('/', async (req: Request, res: Response) =>
+  userController.role(req, res)
 );
 export default loginRoutes;

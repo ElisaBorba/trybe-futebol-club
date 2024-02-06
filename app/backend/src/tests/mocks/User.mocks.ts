@@ -36,10 +36,17 @@ const withoutPassword = {
   password: '',
 };
 
+const auth =
+  'Bearer eyJhbGciOiJIUInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3MDcxNjExNzZ9.jTpQuMLQ-r0Gr90VDsnAbTHQ__wmbqPnPKwFtxjwmoI';
+
+const role = { role: 'admin' };
+
+const payload = { id: 1, email: 'admin@admin.com' };
+
 const errorMessage = { message: 'Invalid email or password' };
 const errorMessage2 = { message: 'All fields must be filled' };
 
-export {
+export default {
   loginBody,
   correctLogin,
   correctUser,
@@ -49,4 +56,7 @@ export {
   incorrectPassword,
   withoutEmail,
   withoutPassword,
+  auth,
+  role,
+  payload,
 };
