@@ -71,17 +71,18 @@ SequelizeMatches.init(
     sequelize: db,
     modelName: 'matches',
     timestamps: false,
+    underscored: true,
   }
 );
 
 SequelizeMatches.belongsTo(SequelizeTeams, {
   foreignKey: 'home_team_id',
-  as: 'homeTeamId',
+  as: 'homeTeam',
 });
 
 SequelizeMatches.belongsTo(SequelizeTeams, {
   foreignKey: 'away_team_id',
-  as: 'awayTeamId',
+  as: 'awayTeam',
 });
 
 export default SequelizeMatches;

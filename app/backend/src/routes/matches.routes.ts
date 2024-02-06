@@ -1,11 +1,11 @@
-// import { Request, Router, Response } from 'express';
-// import MatchesController from '../controllers/teams.controller';
+import { Request, Router, Response } from 'express';
+import MatchesController from '../controllers/matches.controller';
 
-// const matchesController = new MatchesController();
+const matchesController = new MatchesController();
 
-// const matchesRoutes = Router();
+const matchesRoutes = Router();
 
-// matchesRoutes.get('/', (req: Request, res: Response) =>
-// matchesController.(req, res)
-// );
-// export default matchesRoutes;
+matchesRoutes.get('/', (req: Request, res: Response) =>
+  matchesController.getAllMatches(req, res)
+);
+export default matchesRoutes;
