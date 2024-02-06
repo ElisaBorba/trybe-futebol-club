@@ -7,7 +7,6 @@ import { Token } from '../Interfaces/iToken';
 import ILoginBody from '../Interfaces/iLogin';
 import jwtUtil from '../utils/jwt.utils';
 import IUser, { IRole } from '../Interfaces/iUser';
-// import SequelizeUsers from '../database/models/SequelizeUsers';
 
 export default class UserService {
   constructor(private userModel: IUserModel = new UserModel()) {}
