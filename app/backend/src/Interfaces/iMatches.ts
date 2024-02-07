@@ -1,4 +1,4 @@
-import ITeams from './ITeams';
+// import ITeams from './ITeams';
 
 export default interface IMatches {
   id: number;
@@ -8,17 +8,17 @@ export default interface IMatches {
   awayTeamGoals: number;
   inProgress: boolean;
 }
-export interface IMatchesWithTeamsNames {
-  id: number;
-  homeTeamId: number;
-  homeTeamGoals: number;
-  awayTeamId: number;
-  awayTeamGoals: number;
-  inProgress: boolean;
-  homeTeam: {
-    teamName: ITeams['teamName'];
-  };
-  awayTeam: {
-    teamName: ITeams['teamName'];
-  };
-}
+// export interface IMatchesWithTeamsNames {
+//   id: number;
+//   homeTeamId: number;
+//   homeTeamGoals: number;
+//   awayTeamId: number;
+//   awayTeamGoals: number;
+//   inProgress: boolean;
+//   homeTeam: {
+//     teamName: ITeams['teamName'];
+//   };
+//   awayTeam: {
+//     teamName: ITeams['teamName'];
+//   };
+// }

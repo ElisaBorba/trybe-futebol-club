@@ -1,5 +1,5 @@
-import { IMatchesWithTeamsNames } from './iMatches';
+import IMatches from './iMatches';
 
 export default interface IMatchesModel {
-  findAll(): Promise<IMatchesWithTeamsNames[]>;
+  findAll(): Promise<IMatches[]>;
 }
