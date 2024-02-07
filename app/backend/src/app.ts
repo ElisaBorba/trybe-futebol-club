@@ -4,7 +4,6 @@ import 'express-async-errors';
 import errorMiddleware from './middlewares/errorMiddleware';
 
 const { teamsRoutes, loginRoutes, matchesRoutes } = routes;
-
 class App {
   public app: express.Express;
 

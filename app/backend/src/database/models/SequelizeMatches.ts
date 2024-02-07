@@ -22,7 +22,7 @@ class SequelizeMatches extends Model<
 
   declare awayTeamGoals: number;
 
-  declare inProgess: boolean;
+  declare inProgress: boolean;
 }
 
 SequelizeMatches.init(
@@ -61,7 +61,7 @@ SequelizeMatches.init(
       allowNull: false,
       field: 'away_team_goals',
     },
-    inProgess: {
+    inProgress: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       field: 'in_progress',
@@ -76,12 +76,12 @@ SequelizeMatches.init(
 );
 
 SequelizeMatches.belongsTo(SequelizeTeams, {
-  foreignKey: 'home_team_id',
+  foreignKey: 'homeTeamId',
   as: 'homeTeam',
 });
 
 SequelizeMatches.belongsTo(SequelizeTeams, {
-  foreignKey: 'away_team_id',
+  foreignKey: 'awayTeamId',
   as: 'awayTeam',
 });
 

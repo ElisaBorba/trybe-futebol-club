@@ -42,7 +42,7 @@ export default {
         allowNull: false,
         field: 'away_team_goals',
       },
-      inProgess: {
+      inProgress: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         field: 'in_progress',
