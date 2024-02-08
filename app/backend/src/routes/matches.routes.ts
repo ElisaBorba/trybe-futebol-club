@@ -17,4 +17,7 @@ matchesRoutes.patch(
 matchesRoutes.patch('/:id', validateToken, (req: Request, res: Response) =>
   matchesController.updateMatch(req, res)
 );
+matchesRoutes.post('/', validateToken, (req: Request, res: Response) =>
+  matchesController.createMatch(req, res)
+);
 export default matchesRoutes;

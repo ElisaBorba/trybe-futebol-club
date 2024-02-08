@@ -34,6 +34,11 @@ export default class MatchesController {
     );
     res.status(mapStatusHTTP(status)).json(data);
   }
+
+  public async createMatch(req: Request, res: Response) {
+    const { status, data } = await this.matchesService.createMatch(req.body);
+    res.status(mapStatusHTTP(status)).json(data);
+  }
 }
 // {
 //   "email": "admin@admin.com",

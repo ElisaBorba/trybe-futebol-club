@@ -1,4 +1,4 @@
-import IMatches from './iMatches';
+import IMatches, { ICreateMatches } from './iMatches';
 import { NewEntity } from './iNewEntity';
 
 export default interface IMatchesModel {
@@ -6,8 +6,9 @@ export default interface IMatchesModel {
   findAllInProgress(inProgress?: boolean): Promise<IMatches[]>;
   findById(id: IMatches['id']): Promise<IMatches | null>;
   finishedMatch(id: IMatches['id']): Promise<IMatches | null>;
-  updatedMatch(
+  update(
     id: IMatches['id'],
     data: Partial<NewEntity<IMatches>>
   ): Promise<IMatches | null>;
+  create(data: Partial<ICreateMatches>): Promise<IMatches>;
 }
