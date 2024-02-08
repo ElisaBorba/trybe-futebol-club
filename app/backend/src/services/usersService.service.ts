@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import * as bcrypt from 'bcryptjs';
 import UserModel from '../models/UserModel';
 import IUserModel from '../Interfaces/IUserModel';
@@ -7,6 +6,11 @@ import { Token } from '../Interfaces/iToken';
 import ILoginBody from '../Interfaces/iLogin';
 import jwtUtil from '../utils/jwt.utils';
 import IUser, { IRole } from '../Interfaces/iUser';
+
+const responseObj = {
+  status: 'unauthorized',
+  data: { message: 'Invalid email or password' },
+};
 
 export default class UserService {
   constructor(private userModel: IUserModel = new UserModel()) {}
@@ -31,13 +35,6 @@ export default class UserService {
     const token = authorization.split(' ')[1];
     try {
       const decoded = await jwtUtil.verify(token);
-      if (!decoded) {
-        return {
-          status: 'unauthorized',
-          data: { message: 'Invalid email or password' },
-        };
-      }
-
       const user = (await this.userModel.login(decoded.email)) as IUser;
       return {
         status: 'successful',
