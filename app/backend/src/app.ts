@@ -20,7 +20,7 @@ class App {
     this.app.use('/login/role', loginRoutes);
     this.app.use('/matches', matchesRoutes);
     this.app.use('/matches/:id/finish', matchesRoutes);
-    // this.app.use('/matches/:id', matchesRoutes);
+    this.app.use('/matches/:id', matchesRoutes);
 
     // Não remova esse middleware de erro, mas fique a vontade para customizá-lo
     // Mantenha ele sempre como o último middleware a ser chamado

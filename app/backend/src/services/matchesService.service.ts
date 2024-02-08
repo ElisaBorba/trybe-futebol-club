@@ -28,7 +28,7 @@ export default class MatchesService {
       return { status: 'notFound', data: { message: `Match ${id} not found` } };
     }
 
-    const updatedMatch = await this.matchesModel.updatedMatch(id);
+    const updatedMatch = await this.matchesModel.finishedMatch(id);
 
     if (!updatedMatch) {
       return {
@@ -38,5 +38,32 @@ export default class MatchesService {
     }
 
     return { status: 'successful', data: { message: 'Finished' } };
+  }
+
+  public async updateMatch(
+    id: number,
+    match: IMatches
+  ): Promise<ServiceResponse<IMatches>> {
+    try {
+      // const foundMatch = await this.matchesModel.findById(id);
+      // if (!foundMatch) {
+      //   return {
+      //     status: 'notFound',
+      //     data: { message: `Match ${id} not found` },
+      //   };
+      // }
+      const updatedMatch = await this.matchesModel.finishedMatch(id, {
+        ...match,
+        homeTeamGoals,
+        awayTeamGoals,
+      });
+
+      return { status: 'successful', data: updatedMatch };
+    } catch (error) {
+      return {
+        status: 'conflict',
+        data: { message: `There are no updates to perform this Match ${id}` },
+      };
+    }
   }
 }
