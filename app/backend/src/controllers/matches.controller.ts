@@ -7,9 +7,15 @@ export default class MatchesController {
 
   public async getAllMatches(req: Request, res: Response) {
     const { inProgress } = req.query;
-    const { status, data } = await this.matchesService.getAllMatches(
-      inProgress === 'true'
-    );
+    let matchesResponse;
+    if (inProgress === 'true') {
+      matchesResponse = await this.matchesService.getInProgressMatches(true);
+    } else if (inProgress === 'false') {
+      matchesResponse = await this.matchesService.getInProgressMatches(false);
+    } else {
+      matchesResponse = await this.matchesService.getAllMatches();
+    }
+    const { status, data } = matchesResponse;
     res.status(mapStatusHTTP(status)).json(data);
   }
 
