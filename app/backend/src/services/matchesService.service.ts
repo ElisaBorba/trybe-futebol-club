@@ -40,23 +40,12 @@ export default class MatchesService {
     return { status: 'successful', data: { message: 'Finished' } };
   }
 
-  public async updateMatch(
+  public async updatedMatch(
     id: number,
     match: IMatches
-  ): Promise<ServiceResponse<IMatches>> {
+  ): Promise<ServiceResponse<IMatches | null>> {
     try {
-      // const foundMatch = await this.matchesModel.findById(id);
-      // if (!foundMatch) {
-      //   return {
-      //     status: 'notFound',
-      //     data: { message: `Match ${id} not found` },
-      //   };
-      // }
-      const updatedMatch = await this.matchesModel.finishedMatch(id, {
-        ...match,
-        homeTeamGoals,
-        awayTeamGoals,
-      });
+      const updatedMatch = await this.matchesModel.updatedMatch(id, match);
 
       return { status: 'successful', data: updatedMatch };
     } catch (error) {

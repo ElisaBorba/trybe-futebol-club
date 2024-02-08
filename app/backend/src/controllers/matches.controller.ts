@@ -27,11 +27,15 @@ export default class MatchesController {
 
   public async updateMatch(req: Request, res: Response) {
     const { id } = req.params;
-    const { match } = req.params;
-    const { status, data } = await this.matchesService.finishMatch(
+    const match = req.body;
+    const { status, data } = await this.matchesService.updatedMatch(
       Number(id),
       match
     );
     res.status(mapStatusHTTP(status)).json(data);
   }
 }
+// {
+//   "email": "admin@admin.com",
+//   "password": "secret_admin"
+// }
