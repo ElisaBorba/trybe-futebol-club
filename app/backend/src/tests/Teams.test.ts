@@ -11,7 +11,7 @@ const { app } = new App();
 const { expect } = chai;
 
 describe('Teams Endpoint Test', () => {
-  it('Retorna todos os times ', async () => {
+  it('Retorna todos os times', async () => {
     sinon.stub(SequelizeTeams, 'findAll').resolves(allTeams as any);
 
     const { status, body } = await chai.request(app).get('/teams');
