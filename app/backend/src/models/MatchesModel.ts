@@ -1,5 +1,3 @@
-/* eslint-disable max-lines-per-function */
-// import { NewEntity } from '../Interfaces/iNewEntity';
 import SequelizeMatches from '../database/models/SequelizeMatches';
 import SequelizeTeams from '../database/models/SequelizeTeams';
 import IMatchesModel from '../Interfaces/iMatchesModel';
@@ -58,22 +56,27 @@ export default class MatchesModel implements IMatchesModel {
     return this.findById(id);
   }
 
+  async hometeamExists(teamId: IMatches['homeTeamId']): Promise<boolean> {
+    const team = await this.model.findOne({ where: { homeTeamId: teamId } });
+    return !!team;
+  }
+
+  async awayteamExists(teamId: IMatches['awayTeamId']): Promise<boolean> {
+    const team = await this.model.findOne({ where: { awayTeamId: teamId } });
+    return !!team;
+  }
+
   async create(data: NewEntity<ICreateMatches>): Promise<IMatches> {
     const dbData = await this.model.create(data);
-    const {
-      homeTeamId,
-      homeTeamGoals,
-      awayTeamId,
-      awayTeamGoals,
-      inProgress,
-    }: IMatches = dbData;
+    const { homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals }: IMatches =
+      dbData;
     return {
       id: dbData.id,
       homeTeamId,
       homeTeamGoals,
       awayTeamId,
       awayTeamGoals,
-      inProgress,
+      inProgress: true,
     };
   }
 }

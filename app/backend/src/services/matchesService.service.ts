@@ -47,7 +47,6 @@ export default class MatchesService {
   ): Promise<ServiceResponse<IMatches | null>> {
     try {
       const updatedMatch = await this.matchesModel.update(id, match);
-
       return { status: 'successful', data: updatedMatch };
     } catch (error) {
       return {
@@ -60,7 +59,17 @@ export default class MatchesService {
   public async createMatch(
     data: NewEntity<IMatches>
   ): Promise<ServiceResponse<IMatches>> {
+    const homeTeam = await this.matchesModel.hometeamExists(data.homeTeamId);
+    const awayTeam = await this.matchesModel.awayteamExists(data.awayTeamId);
+
+    if (!homeTeam || !awayTeam) {
+      return {
+        status: 'conflict',
+        data: { message: 'One of the teams was not found' },
+      };
+    }
+
     const newMatch = await this.matchesModel.create(data);
-    return { status: 'successful', data: newMatch };
+    return { status: 'created', data: newMatch };
   }
 }

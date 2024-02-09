@@ -40,7 +40,3 @@ export default class MatchesController {
     res.status(mapStatusHTTP(status)).json(data);
   }
 }
-// {
-//   "email": "admin@admin.com",
-//   "password": "secret_admin"
-// }

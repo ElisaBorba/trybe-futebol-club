@@ -11,4 +11,10 @@ export default interface IMatchesModel {
     data: Partial<NewEntity<IMatches>>
   ): Promise<IMatches | null>;
   create(data: Partial<ICreateMatches>): Promise<IMatches>;
+  hometeamExists(
+    teamId: IMatches['homeTeamId'] | IMatches['awayTeamId']
+  ): Promise<boolean>;
+  awayteamExists(
+    teamId: IMatches['homeTeamId'] | IMatches['awayTeamId']
+  ): Promise<boolean>;
 }
