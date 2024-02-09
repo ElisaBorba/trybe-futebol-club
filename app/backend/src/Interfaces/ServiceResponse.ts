@@ -4,6 +4,7 @@ type ServiceResponseErrorType =
   | 'invalidData'
   | 'unauthorized'
   | 'notFound'
+  | 'unprocessableEntity'
   | 'conflict';
 
 export type ServiceResponseError = {

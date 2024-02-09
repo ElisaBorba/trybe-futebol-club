@@ -4,6 +4,9 @@ import IMatchesModel from '../Interfaces/iMatchesModel';
 import { ServiceMessage, ServiceResponse } from '../Interfaces/ServiceResponse';
 import { NewEntity } from '../Interfaces/iNewEntity';
 
+const errorMessage =
+  'It is not possible to create a match with two equal teams';
+
 export default class MatchesService {
   constructor(private matchesModel: IMatchesModel = new MatchesModel()) {}
 
@@ -61,14 +64,19 @@ export default class MatchesService {
   ): Promise<ServiceResponse<IMatches>> {
     const homeTeam = await this.matchesModel.hometeamExists(data.homeTeamId);
     const awayTeam = await this.matchesModel.awayteamExists(data.awayTeamId);
-
     if (!homeTeam || !awayTeam) {
       return {
-        status: 'conflict',
-        data: { message: 'One of the teams was not found' },
+        status: 'notFound',
+        data: { message: 'There is no team with such id!' },
       };
     }
 
+    if (data.awayTeamId === data.homeTeamId) {
+      return {
+        status: 'unprocessableEntity',
+        data: { message: errorMessage },
+      };
+    }
     const newMatch = await this.matchesModel.create(data);
     return { status: 'created', data: newMatch };
   }
