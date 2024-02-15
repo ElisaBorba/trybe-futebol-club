@@ -23,10 +23,6 @@ export default class LeaderboardModel implements IBoardsModel {
       dbTeams.map((team) => teamStandingFormatter(team, dbMatches)),
     );
 
-    console.log('LISTA ORDENADAAA', sortedTeams);
-
-    // const list = dbTeams.map((team) => teamStandingFormatter(team, dbMatches));
-
     return sortedTeams;
   }
 }
