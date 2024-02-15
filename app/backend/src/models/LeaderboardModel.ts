@@ -1,4 +1,5 @@
 import teamStandingFormatter from '../utils/teamStandingHome';
+import listFormat from '../utils/orderedListFormatter';
 import SequelizeMatches from '../database/models/SequelizeMatches';
 import SequelizeTeams from '../database/models/SequelizeTeams';
 import IBoardsModel from '../Interfaces/IBoardModel';
@@ -18,13 +19,14 @@ export default class LeaderboardModel implements IBoardsModel {
 
     const dbTeams = await this.teamsModel.findAll();
 
-    return dbTeams.map((team) => teamStandingFormatter(team, dbMatches));
+    const sortedTeams = listFormat(
+      dbTeams.map((team) => teamStandingFormatter(team, dbMatches))
+    );
 
-    // const formattedTeams = dbTeams.map((team) => {
-    //   const formattedTeam = teamStandingFormatter(team, dbMatches);
+    console.log('LISTA ORDENADAAA', sortedTeams);
 
-    //   const { goalsBalance, efficiency, ...resultTeam } = formattedTeam;
-    //   return resultTeam;
-    // });
+    // const list = dbTeams.map((team) => teamStandingFormatter(team, dbMatches));
+
+    return sortedTeams;
   }
 }

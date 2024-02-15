@@ -10,7 +10,7 @@ loginRoutes.post('/', validateLogin, async (req: Request, res: Response) =>
   userController.login(req, res)
 );
 
-loginRoutes.get('/', async (req: Request, res: Response) =>
+loginRoutes.get('/role', async (req: Request, res: Response) =>
   userController.role(req, res)
 );
 export default loginRoutes;
