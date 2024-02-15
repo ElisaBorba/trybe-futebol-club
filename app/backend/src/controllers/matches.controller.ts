@@ -30,7 +30,7 @@ export default class MatchesController {
     const match = req.body;
     const { status, data } = await this.matchesService.updatedMatch(
       Number(id),
-      match
+      match,
     );
     res.status(mapStatusHTTP(status)).json(data);
   }

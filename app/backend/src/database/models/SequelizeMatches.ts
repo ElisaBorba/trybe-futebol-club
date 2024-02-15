@@ -9,8 +9,8 @@ import db from '.';
 import SequelizeTeams from './SequelizeTeams';
 
 class SequelizeMatches extends Model<
-  InferAttributes<SequelizeMatches>,
-  InferCreationAttributes<SequelizeMatches>
+InferAttributes<SequelizeMatches>,
+InferCreationAttributes<SequelizeMatches>
 > {
   declare id: CreationOptional<number>;
 
@@ -73,7 +73,7 @@ SequelizeMatches.init(
     modelName: 'matches',
     timestamps: false,
     underscored: true,
-  }
+  },
 );
 
 SequelizeMatches.belongsTo(SequelizeTeams, {

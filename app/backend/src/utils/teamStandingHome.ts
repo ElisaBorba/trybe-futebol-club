@@ -5,7 +5,7 @@ import IBoard from '../Interfaces/IBoard';
 function calculateTotalPoints(teamId: number, matches: IMatches[]): number {
   return matches
     .filter(
-      (match) => match.homeTeamId === teamId || match.awayTeamId === teamId
+      (match) => match.homeTeamId === teamId || match.awayTeamId === teamId,
     )
     .reduce((totalPoints, match) => {
       const { homeTeamGoals, awayTeamGoals } = match;
@@ -18,7 +18,7 @@ function calculateTotalPoints(teamId: number, matches: IMatches[]): number {
 function calculateTotalGames(teamId: number, matches: IMatches[]): number {
   return matches
     .filter(
-      (match) => match.homeTeamId === teamId || match.awayTeamId === teamId
+      (match) => match.homeTeamId === teamId || match.awayTeamId === teamId,
     )
     .filter((match) => match.inProgress === false).length;
 }
@@ -26,33 +26,33 @@ function calculateTotalGames(teamId: number, matches: IMatches[]): number {
 function calculateTotalVictories(teamId: number, matches: IMatches[]): number {
   return matches.filter(
     (match) =>
-      !match.inProgress &&
-      ((match.homeTeamId === teamId &&
-        match.homeTeamGoals > match.awayTeamGoals) ||
-        (match.awayTeamId === teamId &&
-          match.awayTeamGoals < match.homeTeamGoals))
+      !match.inProgress
+      && ((match.homeTeamId === teamId
+        && match.homeTeamGoals > match.awayTeamGoals)
+        || (match.awayTeamId === teamId
+          && match.awayTeamGoals < match.homeTeamGoals)),
   ).length;
 }
 
 function calculateTotalDraws(teamId: number, matches: IMatches[]): number {
   return matches.filter(
     (match) =>
-      !match.inProgress &&
-      ((match.homeTeamId === teamId &&
-        match.homeTeamGoals === match.awayTeamGoals) ||
-        (match.awayTeamId === teamId &&
-          match.awayTeamGoals === match.homeTeamGoals))
+      !match.inProgress
+      && ((match.homeTeamId === teamId
+        && match.homeTeamGoals === match.awayTeamGoals)
+        || (match.awayTeamId === teamId
+          && match.awayTeamGoals === match.homeTeamGoals)),
   ).length;
 }
 
 function calculateTotalLosses(teamId: number, matches: IMatches[]): number {
   return matches.filter(
     (match) =>
-      !match.inProgress &&
-      ((match.homeTeamId === teamId &&
-        match.homeTeamGoals < match.awayTeamGoals) ||
-        (match.awayTeamId === teamId &&
-          match.awayTeamGoals > match.homeTeamGoals))
+      !match.inProgress
+      && ((match.homeTeamId === teamId
+        && match.homeTeamGoals < match.awayTeamGoals)
+        || (match.awayTeamId === teamId
+          && match.awayTeamGoals > match.homeTeamGoals)),
   ).length;
 }
 
@@ -61,8 +61,8 @@ function calculateGoalsFavor(teamId: number, matches: IMatches[]): number {
 
   matches.forEach((match) => {
     if (
-      !match.inProgress &&
-      (match.homeTeamId === teamId || match.awayTeamId === teamId)
+      !match.inProgress
+      && (match.homeTeamId === teamId || match.awayTeamId === teamId)
     ) {
       if (match.homeTeamId === teamId) {
         goalsFavor += match.homeTeamGoals;
@@ -80,8 +80,8 @@ function calculateGoalsOwn(teamId: number, matches: IMatches[]): number {
 
   matches.forEach((match) => {
     if (
-      !match.inProgress &&
-      (match.homeTeamId === teamId || match.awayTeamId === teamId)
+      !match.inProgress
+      && (match.homeTeamId === teamId || match.awayTeamId === teamId)
     ) {
       if (match.homeTeamId === teamId) {
         goalsOwn += match.awayTeamGoals;
@@ -110,7 +110,7 @@ function calculateEfficiency(teamId: number, matches: IMatches[]): string {
 
 export default function teamStandingFormatter(
   team: ITeams,
-  matches: IMatches[]
+  matches: IMatches[],
 ): IBoard {
   return {
     name: team.teamName,

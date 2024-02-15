@@ -20,7 +20,7 @@ export default class LeaderboardModel implements IBoardsModel {
     const dbTeams = await this.teamsModel.findAll();
 
     const sortedTeams = listFormat(
-      dbTeams.map((team) => teamStandingFormatter(team, dbMatches))
+      dbTeams.map((team) => teamStandingFormatter(team, dbMatches)),
     );
 
     console.log('LISTA ORDENADAAA', sortedTeams);

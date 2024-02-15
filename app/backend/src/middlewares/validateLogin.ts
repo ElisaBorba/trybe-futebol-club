@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 function validateLogin(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Response | void {
   const regex = /^[\w.-]+@(?:[\w-]+\.)+[a-zA-Z]{2,}$/;
   const { email } = req.body;

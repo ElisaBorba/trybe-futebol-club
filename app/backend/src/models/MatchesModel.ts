@@ -41,7 +41,7 @@ export default class MatchesModel implements IMatchesModel {
   async finishedMatch(id: IMatches['id']): Promise<IMatches | null> {
     const [affectedRows] = await this.model.update(
       { inProgress: false },
-      { where: { id } }
+      { where: { id } },
     );
     if (affectedRows === 0) return null;
     return this.findById(id);
@@ -49,7 +49,7 @@ export default class MatchesModel implements IMatchesModel {
 
   async update(
     id: IMatches['id'],
-    data: Partial<NewEntity<IMatches>>
+    data: Partial<NewEntity<IMatches>>,
   ): Promise<IMatches | null> {
     const [affectedRows] = await this.model.update(data, { where: { id } });
     if (affectedRows === 0) return null;
@@ -68,8 +68,7 @@ export default class MatchesModel implements IMatchesModel {
 
   async create(data: NewEntity<ICreateMatches>): Promise<IMatches> {
     const dbData = await this.model.create(data);
-    const { homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals }: IMatches =
-      dbData;
+    const { homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals }: IMatches = dbData;
     return {
       id: dbData.id,
       homeTeamId,

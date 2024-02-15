@@ -7,11 +7,6 @@ import ILoginBody from '../Interfaces/iLogin';
 import jwtUtil from '../utils/jwt.utils';
 import IUser, { IRole } from '../Interfaces/iUser';
 
-const responseObj = {
-  status: 'unauthorized',
-  data: { message: 'Invalid email or password' },
-};
-
 export default class UserService {
   constructor(private userModel: IUserModel = new UserModel()) {}
 

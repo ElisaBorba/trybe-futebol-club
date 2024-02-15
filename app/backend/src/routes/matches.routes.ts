@@ -7,17 +7,14 @@ const matchesController = new MatchesController();
 const matchesRoutes = Router();
 
 matchesRoutes.get('/', (req: Request, res: Response) =>
-  matchesController.getAllMatches(req, res)
-);
+  matchesController.getAllMatches(req, res));
 matchesRoutes.patch(
   '/:id/finish',
   validateToken,
-  (req: Request, res: Response) => matchesController.finishMatch(req, res)
+  (req: Request, res: Response) => matchesController.finishMatch(req, res),
 );
 matchesRoutes.patch('/:id', validateToken, (req: Request, res: Response) =>
-  matchesController.updateMatch(req, res)
-);
+  matchesController.updateMatch(req, res));
 matchesRoutes.post('/', validateToken, (req: Request, res: Response) =>
-  matchesController.createMatch(req, res)
-);
+  matchesController.createMatch(req, res));
 export default matchesRoutes;

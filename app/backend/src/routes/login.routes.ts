@@ -7,10 +7,7 @@ const userController = new UserController();
 const loginRoutes = Router();
 
 loginRoutes.post('/', validateLogin, async (req: Request, res: Response) =>
-  userController.login(req, res)
-);
-
+  userController.login(req, res));
 loginRoutes.get('/role', async (req: Request, res: Response) =>
-  userController.role(req, res)
-);
+  userController.role(req, res));
 export default loginRoutes;

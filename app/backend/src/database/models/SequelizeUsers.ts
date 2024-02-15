@@ -8,8 +8,8 @@ import {
 import db from '.';
 
 class SequelizeUsers extends Model<
-  InferAttributes<SequelizeUsers>,
-  InferCreationAttributes<SequelizeUsers>
+InferAttributes<SequelizeUsers>,
+InferCreationAttributes<SequelizeUsers>
 > {
   declare id: CreationOptional<number>;
 
@@ -51,7 +51,7 @@ SequelizeUsers.init(
     sequelize: db,
     modelName: 'users',
     timestamps: false,
-  }
+  },
 );
 
 export default SequelizeUsers;

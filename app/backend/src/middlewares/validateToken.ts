@@ -6,7 +6,7 @@ import UserModel from '../models/UserModel';
 async function validateToken(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void | Response> {
   if (!req.headers.authorization) {
     return res.status(401).json({ message: 'Token not found' });

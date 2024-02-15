@@ -1,9 +1,9 @@
 import * as sinon from 'sinon';
 import * as chai from 'chai';
+// @ts-ignore
 import chaiHttp = require('chai-http');
 import SequelizeUser from '../database/models/SequelizeUsers';
 import { App } from '../app';
-// import jwt from 'jsonwebtoken';
 import jwtUtils from '../utils/jwt.utils';
 import userMock from './mocks/User.mocks';
 
