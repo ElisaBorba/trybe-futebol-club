@@ -1,3 +1,4 @@
+import teamStandingFormatter from '../utils/teamStandingHome';
 import SequelizeMatches from '../database/models/SequelizeMatches';
 import SequelizeTeams from '../database/models/SequelizeTeams';
 import IBoardsModel from '../Interfaces/IBoardModel';
@@ -8,26 +9,22 @@ export default class LeaderboardModel implements IBoardsModel {
   private matchesModel = SequelizeMatches;
 
   async findAll(): Promise<IBoard[]> {
-    // const dbMatches = await this.matchesModel.findAll();
-    // return dbMatches;
+    const dbMatches = await this.matchesModel.findAll({
+      include: [
+        { model: SequelizeTeams, as: 'homeTeam', attributes: ['teamName'] },
+        { model: SequelizeTeams, as: 'awayTeam', attributes: ['teamName'] },
+      ],
+    });
+
+    const dbTeams = await this.teamsModel.findAll();
+
+    return dbTeams.map((team) => teamStandingFormatter(team, dbMatches));
+
+    // const formattedTeams = dbTeams.map((team) => {
+    //   const formattedTeam = teamStandingFormatter(team, dbMatches);
+
+    //   const { goalsBalance, efficiency, ...resultTeam } = formattedTeam;
+    //   return resultTeam;
+    // });
   }
 }
-
-// export default interface IBoard {
-//   name: string;
-//   totalPoints: number;
-//   totalGames: number;
-//   totalVictories: number;
-//   totalDraws: number;
-//   totalLosses: number;
-//   goalsFavor: number;
-//   goalsOwn: number;
-//   goalsBalance: number;
-//   efficiency: string;
-// }
-
-// import IBoard from './IBoard';
-
-// export default interface IBoardModel {
-//   findAll(): Promise<IBoard[]>;
-// }

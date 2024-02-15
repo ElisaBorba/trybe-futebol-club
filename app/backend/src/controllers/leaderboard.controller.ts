@@ -7,7 +7,6 @@ export default class LeaderboardController {
 
   public async getStandings(_req: Request, res: Response) {
     const { status, data } = await this.leaderboardService.getStandings();
-
     res.status(mapStatusHTTP(status)).json(data);
   }
 }

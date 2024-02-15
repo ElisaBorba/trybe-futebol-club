@@ -5,7 +5,7 @@ const leaderboardController = new LeaderboardController();
 
 const leaderboardRoutes = Router();
 
-leaderboardRoutes.get('/home', async (req: Request, res: Response) =>
+leaderboardRoutes.get('/', (req: Request, res: Response) =>
   leaderboardController.getStandings(req, res)
 );
 
